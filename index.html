@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whistle</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js" type="module" defer></script> 
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li> <button id="button-lista"> Comandos </button> </li>
+                <li> <button id="button-form"> Criar Comando</button> </li>
+                <li> <button id="button-configs"> Configuracoes </button> </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <dialog id="modal-lista">
+            
+            
+        </dialog >
+        
+        <dialog id="modal-form">
+            <form>
+
+                <fieldset>
+                    <legend> Criar comando </legend>
+                    <label for="nome">
+                        nome:
+                        <input type="text" name="nome" id="">
+                    </label>
+
+                    <label for="url">
+                        url:
+                        <input type="url" name="url" id="">
+                    </label>
+                    <label for="args">
+                        fetch args:
+                        <textarea name="args" id=""  rows="10" spellcheck="false"></textarea>
+                    </label>
+                
+                    <label for="mode">
+                        escutar somente:
+                        <select name="mode" id="modeSelector" placeholder="filtrar por">
+                            <option value="claps" selected="true">sequencia de palmas</option>
+                            <option value="pitch">notas musicais</option>
+                            <option value="voice">comando de voz</option>
+                        </select>
+                    </label>                    
+
+                    <label for="comando">
+                        comando:
+                        <textarea name="comando"  rows="1" id="identified" readonly placeholder="aperte o botao ao lado..."></textarea>
+                        <button type="button"> gravar </button>
+                    </label>
+
+                    <input type="hidden" name="uuid" id="uuid-comando" />
+                    <div>
+                        <button type="button" id="form-yes"> salvar </button>
+                        <button type="button" id="form-no"> excluir </button>
+                    </div>
+                </fieldset>
+
+
+            </form>
+        </dialog>
+
+        <dialog id="modal-configs">    
+            <form>
+                <fieldset>
+                    <legend>Comandos de voz</legend>
+                    <label for="wakeword">
+                        wakeword
+                        <select name="wakeword">
+                            <option value="nenhum">null</option>
+                            <option value="yes">Yes</option> 
+                            <option value="no">No</option> 
+                            <option value="up">Up</option> 
+                            <option value="down">Down</option> 
+                            <option value="left">Left</option>
+                            <option value="right">Right</option> 
+                            <option value="on">On</option> 
+                            <option value="off">Off</option> 
+                            <option value="stop">Stop</option> 
+                            <option value="go">Go</option> 
+                            <option value="zero">Zero</option> 
+                            <option value="one">One</option> 
+                            <option value="two">Two</option> 
+                            <option value="three">Three</option> 
+                            <option value="four">Four</option> 
+                            <option value="five">Five</option>
+                            <option value="six">Six</option>
+                            <option value="seven">Seven</option>
+                            <option value="eight">Eight</option>
+                            <option value="nine">Nine</option>
+                            <option value="bed">Bed</option>
+                            <option value="bird">Bird</option>
+                            <option value="cat">Cat</option>
+                            <option value="dog">Dog</option>
+                            <option value="happy">Happy</option>
+                            <option value="house">House</option>
+                            <option value="marvin">Marvin</option>
+                            <option value="sheila">Sheila</option>
+                            <option value="tree">Tree</option>
+                            <option value="wow">Wow</option>
+                            <option value="backward">Backward</option>
+                            <option value="forward">Forward</option>
+                            <option value="follow">Follow</option>
+                            <option value="learn">Learn</option>
+                            <option value="visual">Visual</option>
+                        </select>
+                    </label>
+                    <label for="offsetVoice">
+                        offsetVoice
+                        <input type="range" name="offsetVoice" step="0.01" min="0" max="1">
+                    </label>
+                    <label for="offsetSilence">
+                        offsetSilence
+                        <input type="range" name="offsetSilence" step="0.01" min="0" max="1">
+                    </label>
+                    <label for="maxSilenceLength">
+                        maxSilenceLength
+                        <input type="range" name="maxSilenceLength" step="0.1" min="0" max="5">
+                    </label>
+                    <label for="AverageWindow">
+                        AverageWindow
+                        <input type="range" name="AverageWindow" step="1" min="1" max="10">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Analize de som</legend>
+                    <label for="fftSize">
+                        Tamanho da FFT
+                        <input type="range" name="fftSize" max="2048" min="512">
+                    </label>
+                    <label for="minDecibels">
+                        Min Decibels
+                        <input type="range" name="minDecibels" max="0" min="-254">
+                    </label>
+                    <label for="maxDecibels">
+                        Max Decibels
+                        <input type="range" name="maxDecibels" max="0" min="-254">
+                    </label>
+                    <label for="smoothingTimeConstant">
+                        smoothingTimeConstant
+                        <input type="range" name="smoothingTimeConstant" max="1.0" min="0.0" step="0.1">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Deteccao de palmas</legend>
+                    <label for="MIN_BIN_INCREMENT">
+                        min_bin_increment
+                        <input type="range" name="MIN_BIN_INCREMENT" min="0" max="255" step="1">
+                    </label>
+                    <label for="MIN_PERCENT_TRIGGER">
+                        min_percent_trigger
+                        <input type="range" name="MIN_PERCENT_TRIGGER" min="0" max="1" step="0.01">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Deteccao de notas musicais</legend>
+                    <label for="clarity">
+                        min_clarity
+                        <input type="range" name="clarity" min="0" max="1" step="0.01">
+                    </label>
+                    <label for="maxDiff">
+                        maxDiff
+                        <input type="range" name="maxDiff" min="0" max="100" step="1">
+                    </label>
+                    <label for="minFreq">
+                        minFreq
+                        <input type="range" name="minFreq" min="0" max="1000" step="1">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>configuracoes da UI</legend>
+                    <label for="backgroundImage">
+                        backgroundImage
+                        <input type="url" name="backgroundImage">
+                    </label>
+                    <label for="wakewordSound">
+                        wakewordSound
+                        <input type="url" name="wakewordSound">
+                    </label>
+                </fieldset>
+            </form>
+        </dialog>
+
+    </main>
+
+    <footer>
+        <p> ©2025, Caio Lima Viana </p>
+        <p> v1.0 </p>
+        <a href="https://github.com/CaioLimaViana" target="_blank" rel="noopener noreferrer"> Meu GitHub</a>
+    </footer>
+</body>
+</html>
