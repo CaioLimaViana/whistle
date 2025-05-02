@@ -36,7 +36,7 @@ function updateParams(event,configs_list)
 {
     
     let configs = event.detail;
-
+    console.log(configs);
     configs_list.forEach((configObject)=>{
         Object.entries(configs).forEach(([key,value])=>{
             if(key in configObject) configObject[key] = value;
