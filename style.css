@@ -47,7 +47,8 @@ dialog[open]
     padding: 0px;
     height: 70vh;
     width: 70vw;
-
+    
+    color:rgb(176, 255, 251);
     border: 2px solid #00ffff88;
     border-radius: 20px;
     /*background-color: #00FFFF22;*/
