@@ -32,17 +32,17 @@ function Processor(event)
 
         if(tipo === "claps" && comando.includes("clap") && JSON.stringify(comando) === JSON.stringify(dados))
         {                   
-            fetch(url,args);   
+            window.open(url,"_blank");//fetch(url,args);   
         }
         else if(tipo === "pitch" && comando.length === dados.length)
         {
             
             let match = comando.every((t,i)=>{ return Math.abs(t - dados[i]) < 10 });
-            if(match == true) fetch(url,args);                        
+            if(match == true) window.open(url,"_blank");//fetch(url,args);                        
         }
         else if(tipo === "voice" && comando.length === dados.length)
         {
-            if(comando[0] === dados[0]) fetch(url,args);
+            if(comando[0] === dados[0]) window.open(url,"_blank");//fetch(url,args);
         }
     }
 }
